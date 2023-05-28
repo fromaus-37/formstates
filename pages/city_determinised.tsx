@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import styles from './city.module.scss';
 import { useRef, useEffect } from 'react';
 import { clsx } from 'clsx';
@@ -95,8 +96,6 @@ const CityDeterminised = () => {
         // as it's the final state
         panelResult.current!.classList.remove(styles.invisible);
         break;
-      default:
-        throw new Error(`UI state ${refCurrentUIState.current} not understood`);
     }
   };
 
@@ -264,7 +263,7 @@ const CityDeterminised = () => {
         </p>
       </section>
       <section ref={panelResult} className={clsx(styles.invisible)}>
-        <h1 data-testid={testIds.rightAnswer}>That's right!</h1>
+        <h1 data-testid={testIds.rightAnswer}>That&apos!s right!</h1>
       </section>
     </>
   );

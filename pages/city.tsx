@@ -1,6 +1,7 @@
-import styles from "./city.module.scss";
-import { useRef, useEffect } from "react";
-import { clsx } from "clsx";
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import styles from './city.module.scss';
+import { useRef, useEffect } from 'react';
+import { clsx } from 'clsx';
 
 const City = () => {
   const txtCity = useRef<HTMLTextAreaElement>(null);
@@ -11,15 +12,15 @@ const City = () => {
   const panelResult = useRef<HTMLDivElement>(null);
 
   enum uiStates {
-    noError = "noError",
-    loading = "loading",
-    wrongAnswer = "wrongAnswer",
-    rightAnswer = "rightAnswer",
+    noError = 'noError',
+    loading = 'loading',
+    wrongAnswer = 'wrongAnswer',
+    rightAnswer = 'rightAnswer',
   }
 
   enum submittableStates {
-    submittable = "submittable",
-    notSubmittable = "notSubmittable",
+    submittable = 'submittable',
+    notSubmittable = 'notSubmittable',
   }
 
   const setSubmittableState = (submittableState: submittableStates) => {
@@ -33,8 +34,6 @@ const City = () => {
       case submittableStates.notSubmittable:
         btnSubmit.current!.disabled = true;
         break;
-      default:
-        throw new Error(`Submittable state ${submittableState} not understood`);
     }
   };
 
@@ -67,8 +66,6 @@ const City = () => {
         //    about state of other controls in this panel
         panelResult.current!.classList.remove(styles.invisible);
         break;
-      default:
-        throw new Error(`UI state ${uiState} not understood`);
     }
   };
 
@@ -76,7 +73,7 @@ const City = () => {
 
   function showResult() {
     window.clearTimeout(resultTimeout);
-    if (txtCity.current!.value.trim().toLowerCase() === "istanbul") {
+    if (txtCity.current!.value.trim().toLowerCase() === 'istanbul') {
       setUIState(uiStates.rightAnswer);
     } else {
       setUIState(uiStates.wrongAnswer);
