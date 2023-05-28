@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="city.css">
+    <script src="city.js" defer></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <section id="panelQuiz">
+        <h1>City quiz</h1>
+        <p>What city is located between two continents?</p>
+        <div>
+            <textarea id="txtCity" onchange="handleCityChange" cols="30" rows="10"></textarea>
+        </div>
+        <button id="btnSubmit" onclick="handleSubmitClick" disabled> Submit </button>
+        <p id="txtWrongAnswer" class="invisible panelQuiz__wrongAnswer"> Good guess but a wrong answer. Try again! </p>
+        <p id="txtLoading" class="invisible"> Loading... </p>
+    </section>
+    <section id="panelResult" class="invisible">
+        <h1>That&nbsp;s right!</h1>
+    </section>
+</body>
+
+</html>

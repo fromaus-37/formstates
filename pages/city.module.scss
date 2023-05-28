@@ -1,0 +1,10 @@
+.invisible {
+  display: none;
+}
+
+
+.panelQuiz{
+  &__wrongAnswer {
+  color: red;
+}
+}
