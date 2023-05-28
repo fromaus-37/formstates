@@ -16,5 +16,7 @@
   },
   "stylelint.validate": ["css", "scss"],
   "editor.formatOnSave": true,
-  "eslint.run": "onSave",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  }
 }
