@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CityDeterminised, { testIds } from './city_determinised';
+import CityDeterminised, { testIds } from '../pages/city_determinised';
 import {
   userEvent,
   within,
@@ -74,8 +74,8 @@ const createPOM = (canvasElement: HTMLElement) => {
         expect(submitButton).toBeEnabled();
       },
 
-      textboxesInvisible: async () => {
-        await expect(canvas.queryAllByRole('textbox')).toHaveLength(0);
+      textboxesInvisible: () => {
+        expect(canvas.queryAllByRole('textbox')).toHaveLength(0);
       },
 
       cityVisibleAndDisabled: () => {

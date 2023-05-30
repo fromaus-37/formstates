@@ -17,8 +17,6 @@
     "release": "semantic-release"
   },
   "dependencies": {
-    "@storybook/addon-docs": "7.0.12",
-    "@storybook/addon-jest": "7.0.12",
     "@types/node": "20.1.2",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
@@ -27,7 +25,7 @@
     "next": "13.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "sinon": "15.1.0",
+    "storybook-addon-next": "1.8.0",
     "typescript": "5.0.4"
   },
   "devDependencies": {
@@ -39,8 +37,10 @@
     "@semantic-release/git": "10.0.1",
     "@storybook/addon-a11y": "7.0.12",
     "@storybook/addon-coverage": "0.0.8",
+    "@storybook/addon-docs": "7.0.12",
     "@storybook/addon-essentials": "7.0.11",
     "@storybook/addon-interactions": "7.0.11",
+    "@storybook/addon-jest": "7.0.12",
     "@storybook/addon-links": "7.0.11",
     "@storybook/addon-storysource": "7.0.12",
     "@storybook/blocks": "7.0.11",
@@ -49,6 +49,7 @@
     "@storybook/react": "7.0.11",
     "@storybook/test-runner": "0.10.0",
     "@storybook/testing-library": "0.0.14-next.2",
+    "@types/sinon": "10.0.15",
     "@typescript-eslint/eslint-plugin": "5.59.7",
     "@typescript-eslint/parser": "5.59.7",
     "chromatic": "6.17.4",
@@ -61,6 +62,7 @@
     "prettier": "2.8.8",
     "sass": "1.62.1",
     "semantic-release": "21.0.2",
+    "sinon": "15.1.0",
     "storybook": "7.0.11",
     "stylelint": "15.6.2",
     "stylelint-config-prettier-scss": "1.0.0",
