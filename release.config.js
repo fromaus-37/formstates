@@ -86,7 +86,7 @@ module.exports = {
         },
         //this really does need to be declared again
         //(declaring it in the commitAnalyzer once is not enough)
-        //probabaly because releaseNotesGenerator too has to parse
+        //probably because releaseNotesGenerator too has to parse
         //the commits
         parserOpts: {
           mergePattern:
