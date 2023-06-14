@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "stylelint --allow-empty-input \"**/*.{css,scss}\" && next lint",
+    "lint": "prettier --check . && stylelint --allow-empty-input \"**/*.{css,scss}\" && next lint",
     "format": "prettier --write .",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
