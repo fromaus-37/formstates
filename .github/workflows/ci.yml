@@ -21,7 +21,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Detect package manager
@@ -66,8 +65,8 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
-      - name: Build with Next.js
-        run: ${{ steps.detect-package-manager.outputs.runner }} next build
+      - name: Lint and Build
+        run: ${{ steps.detect-package-manager.outputs.manager }} run build
       - name: Static HTML export with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next export
       - name: Upload artifact
