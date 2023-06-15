@@ -3,3 +3,5 @@ styles/Home.module.css
 coverage
 stories
 storybook-static
+out
+.next
