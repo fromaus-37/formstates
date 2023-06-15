@@ -19,6 +19,7 @@ jobs:
         with:
           submodules: true
       - run: |
+          npm install
           npm run build
       - name: Build And Deploy
         id: builddeploy
