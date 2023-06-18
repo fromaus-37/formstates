@@ -3,7 +3,7 @@
 }
 
 .panelQuiz {
-  &__wrongAnswer {
-    color: rgba(2, 2, 2, 0.2);
-  }
+&__wrongAnswer {
+  color: red;
+}
 }
