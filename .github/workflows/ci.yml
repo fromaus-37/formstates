@@ -46,6 +46,7 @@ jobs:
       - name: Download build from artifacts
         uses: actions/download-artifact@v3.0.2
         with:
+          name: static generated site
           path: out/
       - name: Deploy
         id: deploytoswa
