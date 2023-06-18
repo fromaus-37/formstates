@@ -63,7 +63,7 @@ jobs:
         env:
           is_static_export: true
 
-      - name: Post link to app on PR
+      - name: Post app link on PR
         uses: marocchino/sticky-pull-request-comment@v2.6.2
         with:
           message: |
