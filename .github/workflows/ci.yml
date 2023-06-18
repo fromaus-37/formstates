@@ -64,16 +64,6 @@ jobs:
         env:
           is_static_export: true
 
-      - name: Post app link on PR
-        uses: marocchino/sticky-pull-request-comment@v2.6.2
-        with:
-          message: |
-            # Deployed to UAT
-
-            ${{ steps.deploytoswa.outputs.static_web_app_url }}
-
-            **Exploratory testing welcome!**
-
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
