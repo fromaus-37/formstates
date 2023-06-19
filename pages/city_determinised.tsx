@@ -240,7 +240,7 @@ const CityDeterminised = () => {
             ref={txtCity}
             onChange={handleCityChange}
             cols={30}
-            rows={10}
+            rows={20}
             name=''
           ></textarea>
         </div>
