@@ -234,7 +234,7 @@ const CityDeterminised = () => {
     <>
       <section ref={panelQuiz}>
         <h1>City quiz</h1>
-        <p>Which city is located between two continents?</p>
+        <p>Whichevers city is located between two continents?</p>
         <div>
           <textarea
             ref={txtCity}

@@ -109,7 +109,7 @@ export const CityReact = ({
       >
         <h1>City quiz</h1>
         <label htmlFor={cityId}>
-          What city is located between two continents?
+          Which city is located between two continents?
         </label>
         <div>
           <textarea
