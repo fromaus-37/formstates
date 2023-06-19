@@ -234,13 +234,13 @@ const CityDeterminised = () => {
     <>
       <section ref={panelQuiz}>
         <h1>City quiz</h1>
-        <p>What city is located between two continents?</p>
+        <p>Whichevers city is located between two continents?</p>
         <div>
           <textarea
             ref={txtCity}
             onChange={handleCityChange}
             cols={30}
-            rows={10}
+            rows={20}
             name=''
           ></textarea>
         </div>
