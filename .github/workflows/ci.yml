@@ -39,7 +39,7 @@ jobs:
     permissions:
       pull-requests: write
     runs-on: ubuntu-22.04
-    name: Deploy Job
+    name: Deploy to UAT
     steps:
       - name: Download build from artifacts
         uses: actions/download-artifact@v3.0.2
