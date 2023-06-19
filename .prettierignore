@@ -6,5 +6,7 @@ coverage
 .prettierignore
 .stylelintignore
 .eslintignore
+.gitignore
 stories
 storybook-static
+*.log

@@ -108,13 +108,20 @@ module.exports = {
         changelogFile: 'docs/CHANGELOG.md',
       },
     ],
-    [
-      '@semantic-release/git',
-      {
-        message:
-          'fix(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
-        assets: ['docs/CHANGELOG.md', 'package.json'],
-      },
-    ],
+    // TODO: note in article
+    //
+    // 1. git plugin was removed as it does git tag, commit
+    //  and push to what ever the remote of the repo that you
+    //  checked out is (this should be origin on local machine
+    //  but may be different in a DevOps environment)
+    //  Optionally it can add files as well like the generated
+    //  release notes/changelog which is how I had configured it
+    //  previously.
+    //
+    // 2. git plugin was a separate install.
+    //
+    // 3. For GitHub Actions and repo env, I no longer
+    //  need it as `/github` plugin is inclucded by default
+    //  when you install semantic-release.
   ],
 };

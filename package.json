@@ -12,7 +12,7 @@
     "build-storybook": "storybook build",
     "storybook-docs": "storybook dev --docs",
     "test-storybook": "test-storybook",
-    "chromatic": "npx chromatic --project-token=chpt_e9d874d66e6316f",
+    "chromatic": "# do nothing as we don't want Chromatic project token in here",
     "prepare": "husky install",
     "release": "semantic-release"
   },
