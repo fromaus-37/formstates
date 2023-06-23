@@ -84,7 +84,7 @@ jobs:
       #   # will be excluded by nyc report
       #   run: |
       #     npx run nyc report
-      - name: Upload coverage reports to Codecov
+      - name: Upload coverage report to Codecov
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
