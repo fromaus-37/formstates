@@ -88,7 +88,7 @@ jobs:
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./coverage/*.json
+          files: ./coverage/coverage-storybook.json
           verbose: true
 
   deploy_to_uat:
