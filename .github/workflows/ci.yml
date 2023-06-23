@@ -1,4 +1,4 @@
-name: Azure Static Web Apps CI/CD
+name: CI
 concurrency: ci-${{ github.ref }}
 on:
   pull_request:
