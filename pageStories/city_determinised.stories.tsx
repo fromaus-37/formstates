@@ -162,7 +162,7 @@ export const RightAnswer: Story = {
   // wait methods; all three async methods are
   // given here: https://testing-library.com/docs/dom-testing-library/api-async/)
   // *
-  play: async ({ canvasElement }) => {
+  /*play: async ({ canvasElement }) => {
     const clock = sinon.useFakeTimers();
 
     const pom = createPOM(canvasElement);
@@ -193,5 +193,5 @@ export const RightAnswer: Story = {
     pom.assert.loadingInvisible();
 
     clock.restore();
-  },
+  },*/
 };

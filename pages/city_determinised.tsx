@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import styles from './city.module.scss';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useId } from 'react';
 import { clsx } from 'clsx';
 
 //in previous react version (with an NFA, basically two
@@ -230,11 +230,15 @@ const CityDeterminised = () => {
     setUIState();
   });
 
+  const answerId = useId();
+
   return (
     <>
       <section ref={panelQuiz}>
         <h1>City quiz</h1>
-        <p>Whichevers city is located between two continents?</p>
+        <label htmlFor={answerId}>
+          Whichevers city is located between two continents?
+        </label>
         <div>
           <textarea
             ref={txtCity}
@@ -242,6 +246,7 @@ const CityDeterminised = () => {
             cols={30}
             rows={20}
             name=''
+            id={answerId}
           ></textarea>
         </div>
         <button ref={btnSubmit} onClick={handleSubmitClick}>

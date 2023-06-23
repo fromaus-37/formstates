@@ -21,6 +21,8 @@ export const UnsubmittedNoInput: Story = {
   args: {
     uiState: uiStates.unsubmitted_noinput,
   },
+
+  render: () => <CityReact uiState={uiStates.unsubmitted_noinput} />,
 };
 
 /**An answer hasn't yet been sumitted. However,
