@@ -47,6 +47,7 @@ jobs:
 
       - name: Build storybook
         run: |
+          npm install
           npm run build-storybook
 
       - name: Run test-runner for component smoke and interaction tests with coverage
