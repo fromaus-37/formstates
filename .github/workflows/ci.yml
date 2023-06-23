@@ -76,19 +76,19 @@ jobs:
         with:
           name: test-runner coverage file
           path: coverage/
-      # - name: Generate combined lcov coverage report
-      #   # TODO: exclude files with extension *.stories.tsx
-      #   # and *.stories.js and *.stories.jsx from
-      #   # coverage report using --exclude parameter
-      #   # of nyc report. by default anything in ./tests
-      #   # will be excluded by nyc report
-      #   run: |
-      #     npx run nyc report
+      - name: Generate combined lcov coverage report
+        # TODO: exclude files with extension *.stories.tsx
+        # and *.stories.js and *.stories.jsx from
+        # coverage report using --exclude parameter
+        # of nyc report. by default anything in ./tests
+        # will be excluded by nyc report
+        run: |
+          npx nyc report -t coverage --reporter lcovonly
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./coverage/coverage-storybook.json
+          files: ./coverage/lcov.info
           verbose: true
 
   deploy_to_uat:
