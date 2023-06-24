@@ -84,6 +84,13 @@ jobs:
         # will be excluded by nyc report
         run: |
           npx nyc report -t coverage --reporter lcovonly
+
+      - name: Upload lcov coverage file
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: combined lcov coverage file
+          path: coverage/lcov.info
+
       - name: Upload coverage report to Codecov
         uses: codecov/codecov-action@v3
         with:
