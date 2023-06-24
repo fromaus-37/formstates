@@ -54,7 +54,7 @@ jobs:
         run: |
           npm run test-storybook:ci
 
-      - name: Upload raw coverage file
+      - name: Upload raw coverage as artifact
         uses: actions/upload-artifact@v3.1.2
         with:
           name: test-runner coverage file
