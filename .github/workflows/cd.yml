@@ -1,4 +1,4 @@
-name: CI
+name: CD
 concurrency: cd
 on:
   push:
@@ -25,10 +25,9 @@ jobs:
           npm install
           npm run build
 
-          - name: Build storybook
-          run: |
-            npm install
-            npm run build-storybook
+      - name: Build storybook
+        run: |
+          npm run build-storybook
 
       - name: Run test-runner for component smoke and interaction tests with coverage
         run: |
