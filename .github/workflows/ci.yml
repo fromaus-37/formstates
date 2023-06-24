@@ -95,7 +95,8 @@ jobs:
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./coverage/cobertura-coverage.xml
+          files: ./coverage/cobertura-coverage.
+          fail_ci_if_error: true
           verbose: true
 
       - name: Upload coverage report to Coveralls
