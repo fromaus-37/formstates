@@ -91,7 +91,7 @@ jobs:
           name: combined cobertura coverage file
           path: coverage/cobertura-coverage.xml
 
-      - name: Upload coverage to Coveralls
+      - name: Upload coverage report to Coveralls
         uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
