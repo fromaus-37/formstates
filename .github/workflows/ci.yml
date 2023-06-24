@@ -1,4 +1,4 @@
-name: Azure Static Web Apps CI/CD
+name: CI
 concurrency: ci-${{ github.ref }}
 on:
   pull_request:
@@ -15,7 +15,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v3.5.3
         with:
-          submodules: true # was part of Azure SWA generated pipeline
+          submodules: true # this attribute was part of original Azure SWA generated pipeline. Don't know why it's here
 
         # have modified build script in package.json
         # to run prettier in checking mode, then
@@ -33,8 +33,80 @@ jobs:
           name: static generated site
           path: out/
 
+  # This is a separate job because
+  # storybook tests require a special storybook build
+  # So might as well run all of them in parallel with build
+  # and integration tests jobs.
+  storybook_tests:
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-22.04
+    name: Storybook tests
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3.5.3
+
+      - name: Build storybook
+        run: |
+          npm install
+          npm run build-storybook
+
+      - name: Run test-runner for component smoke and interaction tests with coverage
+        run: |
+          npm run test-storybook:ci
+
+      - name: Upload raw coverage file
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: test-runner coverage file
+          path: coverage/storybook/coverage-storybook.json
+
+      - name: Run accessibility tests
+        # these do not generate coverage
+        run: |
+          npm run test-storybook-a11y:ci
+
+  publish_test_results:
+    needs: storybook_tests
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-22.04
+    name: Publish coverage and tests run report
+    steps:
+      - name: Download build from artifacts
+        uses: actions/download-artifact@v3.0.2
+        with:
+          name: test-runner coverage file
+          path: coverage/
+      - name: Generate combined lcov coverage report
+        # TODO: exclude files with extension *.stories.tsx
+        # and *.stories.js and *.stories.jsx from
+        # coverage report using --exclude parameter
+        # of nyc report. by default anything in ./tests
+        # will be excluded by nyc report
+        run: |
+          npx nyc report -t coverage --reporter cobertura
+
+      - name: Upload lcov coverage file
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: combined cobertura coverage file
+          path: coverage/cobertura-coverage.xml
+
+      - name: Upload coverage report to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/cobertura-coverage.xml
+          fail_ci_if_error: true
+          verbose: true
+
+      - name: Upload coverage report to Coveralls
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          file: coverage/cobertura-coverage.xml
+          format: cobertura
   deploy_to_uat:
-    needs: build
+    needs: [build, publish_test_results]
     if: github.event.action != 'closed'
     permissions:
       pull-requests: write
