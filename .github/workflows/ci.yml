@@ -99,7 +99,7 @@ jobs:
           fail_ci_if_error: true
           verbose: true
 
-      - name: Upload coverage to Coveralls
+      - name: Upload coverage report to Coveralls
         uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
