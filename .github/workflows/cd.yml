@@ -40,11 +40,11 @@ jobs:
         # of nyc report. by default anything in ./tests
         # will be excluded by nyc report
         run: |
-          npx nyc report -t coverage --reporter cobertura
+          npx nyc report -t coverage/storybook --reporter cobertura
 
       - name: Upload coverage report to Coveralls
         uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          file: coverage/cobertura-coverage.xml
+          file: coverage/storybook/cobertura-coverage.xml
           format: cobertura
