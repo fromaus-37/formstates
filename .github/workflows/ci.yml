@@ -91,7 +91,7 @@ jobs:
           name: combined cobertura coverage file
           path: coverage/cobertura-coverage.xml
 
-      - name: Upload coverage to Codecov
+      - name: Upload coverage report to Codecov
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
