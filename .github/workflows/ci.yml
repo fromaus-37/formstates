@@ -96,6 +96,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           file: coverage/lcov.info
+          format: lcov
   deploy_to_uat:
     needs: [build, publish_test_results]
     if: github.event.action != 'closed'
