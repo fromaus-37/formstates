@@ -91,6 +91,11 @@ jobs:
           files: ./coverage/lcov.info
           verbose: true
 
+      - name: Coveralls GitHub Action
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          file: coverage/coverage-storybook.json
   deploy_to_uat:
     needs: [build, publish_test_results]
     if: github.event.action != 'closed'
