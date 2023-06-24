@@ -91,22 +91,15 @@ jobs:
           name: combined cobertura coverage file
           path: coverage/cobertura-coverage.xml
 
-      - name: Upload coverage report to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./coverage/cobertura-coverage.xml
-          fail_ci_if_error: true
-          verbose: true
-
       - name: Upload coverage report to Coveralls
         uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           file: coverage/cobertura-coverage.xml
           format: cobertura
+
   deploy_to_uat:
-    needs: [build, publish_test_results]
+    needs: build
     if: github.event.action != 'closed'
     permissions:
       pull-requests: write
