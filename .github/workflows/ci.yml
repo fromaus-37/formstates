@@ -98,7 +98,7 @@ jobs:
           files: ./coverage/cobertura-coverage.xml
           verbose: true
 
-      - name: Coveralls GitHub Action
+      - name: Coveralls Action
         uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
