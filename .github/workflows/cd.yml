@@ -1,0 +1,51 @@
+name: CI
+concurrency: cd
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    name: Build
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3.5.3
+        with:
+          submodules: true # this attribute was part of original Azure SWA generated pipeline. Don't know why it's here
+
+        # have modified build script in package.json
+        # to run prettier in checking mode, then
+        # stylelint. ESLint would then be run by the
+        # "next build" which will also produce build
+        # output
+      - name: check formatting, lint and build
+        run: |
+          npm install
+          npm run build
+
+          - name: Build storybook
+          run: |
+            npm install
+            npm run build-storybook
+
+      - name: Run test-runner for component smoke and interaction tests with coverage
+        run: |
+          npm run test-storybook:ci
+
+      - name: Generate combined lcov coverage report
+        # TODO: exclude files with extension *.stories.tsx
+        # and *.stories.js and *.stories.jsx from
+        # coverage report using --exclude parameter
+        # of nyc report. by default anything in ./tests
+        # will be excluded by nyc report
+        run: |
+          npx nyc report -t coverage --reporter cobertura
+
+      - name: Upload coverage report to Coveralls
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          file: coverage/cobertura-coverage.xml
+          format: cobertura
