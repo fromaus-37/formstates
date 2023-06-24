@@ -83,7 +83,7 @@ jobs:
         # of nyc report. by default anything in ./tests
         # will be excluded by nyc report
         run: |
-          npx nyc report -t coverage --reporter lcovonly
+          npx nyc report -t coverage --reporter text-lcov
 
       - name: Upload lcov coverage file
         uses: actions/upload-artifact@v3.1.2
@@ -102,7 +102,7 @@ jobs:
         uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          file: coverage/lcov.info
+          file: cverage/lcov.info
           format: lcov
   deploy_to_uat:
     needs: [build, publish_test_results]
