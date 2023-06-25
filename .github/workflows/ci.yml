@@ -75,7 +75,7 @@ jobs:
         uses: actions/download-artifact@v3.0.2
         with:
           name: test-runner coverage file
-          path: coverage/
+          path: rawcoverage/
       - name: Generate combined lcov coverage
         # TODO: exclude files with extension *.stories.tsx
         # and *.stories.js and *.stories.jsx from
@@ -83,7 +83,7 @@ jobs:
         # of nyc report. by default anything in ./tests
         # will be excluded by nyc report
         run: |
-          npx nyc report -t coverage --reporter cobertura
+          npx nyc report -t rawcoverage --reporter cobertura
 
       - name: Upload lcov coverage file
         uses: actions/upload-artifact@v3.1.2
