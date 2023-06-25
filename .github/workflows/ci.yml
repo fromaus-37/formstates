@@ -103,7 +103,6 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage/cobertura-coverage.xml # optional
-          name: Storybook smoke and component interaction tests # optional
           fail_ci_if_error: true # optional (default = false)
           verbose: true # optional   (default = false)
 
