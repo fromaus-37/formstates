@@ -94,7 +94,7 @@ jobs:
         # and *.stories.js and *.stories.jsx from
         # coverage report using --exclude parameter
         # of nyc report. by default anything in ./tests
-        # will be excluded by  nyc report
+        # will be excluded by nyc report
         run: |
           npx nyc report -t rawcoverage --reporter cobertura
 
