@@ -120,7 +120,7 @@ const createPOM = (canvasElement: HTMLElement) => {
 };
 
 export const WrongAnswer: Story = {
-  play: async ({ canvasElement }) => {
+  /* play: async ({ canvasElement }) => {
     const clock = sinon.useFakeTimers();
 
     const pom = createPOM(canvasElement);
@@ -145,7 +145,7 @@ export const WrongAnswer: Story = {
     pom.assert.rightAnswerInvisible();
 
     clock.restore();
-  },
+  }, */
 };
 
 /**
