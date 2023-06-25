@@ -87,7 +87,7 @@ jobs:
 
       - name: delete rawcoverage dir
         run: |
-          rmdir rawcoverage -rf
+          rm rawcoverage -rf
 
       - name: Upload lcov coverage file
         uses: actions/upload-artifact@v3.1.2
@@ -106,7 +106,6 @@ jobs:
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: coverage/cobertura-coverage.xml # optional
           fail_ci_if_error: true # optional (default = false)
           verbose: true # optional   (default = false)
 
