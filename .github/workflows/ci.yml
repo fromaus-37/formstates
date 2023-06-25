@@ -71,6 +71,19 @@ jobs:
     runs-on: ubuntu-22.04
     name: Publish coverage and tests run report
     steps:
+      # putting this checkout here only
+      # because apparently, the unusable report
+      # error on coverage report uploaded from
+      # a source branch in PR to CodeCov, but not
+      # from main, possibly happens because
+      # coeCov action cannot find the .git directory.
+      # On the other hand, in cd.yml, which runs on main,
+      # source code is checked out in the same job
+      # and that could be why it's successful.
+      #
+      - name: Checkout source code
+        uses: actions/checkout@v3.5.3
+
       - name: Download build from artifacts
         uses: actions/download-artifact@v3.0.2
         with:
