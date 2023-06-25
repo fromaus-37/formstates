@@ -3,4 +3,4 @@ coverage:
     project:
       default:
         # basic
-        target: 55%
+        target: 70%
