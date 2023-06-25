@@ -98,10 +98,6 @@ jobs:
         run: |
           npx nyc report -t rawcoverage --reporter cobertura
 
-      - name: delete rawcoverage dir
-        run: |
-          rm rawcoverage -rf
-
       - name: Upload lcov coverage file
         uses: actions/upload-artifact@v3.1.2
         with:
