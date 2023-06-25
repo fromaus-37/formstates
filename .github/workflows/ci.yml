@@ -98,6 +98,16 @@ jobs:
           file: coverage/cobertura-coverage.xml
           format: cobertura
 
+      - name: Upload coverage report to CodeCov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage/cobertura-coverage.xml # optional
+          flags: unittests # optional
+          name: Storybook smoke and component interaction tests # optional
+          fail_ci_if_error: true # optional (default = false)
+          verbose: true # optional (default = false)
+
   deploy_to_uat:
     needs: build
     if: github.event.action != 'closed'
