@@ -62,7 +62,7 @@ jobs:
         # run this step even if previous step failed:
         if: success() || failure()
         with:
-          name: Storybook smoke and interaction Tests # Name of the check run which will be created
+          name: Storybook test run report # Name of the check run which will be created
           path: testrunreports/*-junit.xml # Path to test results
           reporter: jest-junit # Format of test results
 
