@@ -74,11 +74,30 @@ jobs:
       #     report_paths: 'testrunreports/*-junit.xml'
       #     detailed_summary: true
 
-      - name: Test Summary
-        uses: test-summary/action@v2
-        with:
-          paths: 'testrunreports/*-junit.xml'
+      # PROS:
+      # 1.Give a nice summary markdown which would be great for
+      #   displaying in a sticky PR comment alongside coverage
+      #   comment from Coveralls or CodeCov
+      #
+      # CONS:
+      # 1. Does not generate detailed report so we need to use another
+      #  action
+      # 2. The summary is displayed on the job but is even more obscure
+      #  than the check run summary diaplayed in Checks tab on PR by
+      # other actions like dorny/test-reporter@v1
+      #
+      # - name: Test Summary
+      #   uses: test-summary/action@v2
+      #   with:
+      #     paths: 'testrunreports/*-junit.xml'
+      #   if: always()
+
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
+        with:
+          files: |
+            testrunreports/*-junit.xml
 
       # - name: Test Report
       #   uses: dorny/test-reporter@v1
