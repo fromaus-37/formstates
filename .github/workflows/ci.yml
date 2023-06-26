@@ -67,6 +67,7 @@ jobs:
         if: success() || failure() # always run even if the previous step fails
         with:
           report_paths: 'testrunreports/*-junit.xml'
+          detailed_summary: true
 
       # - name: Test Report
       #   uses: dorny/test-reporter@v1
