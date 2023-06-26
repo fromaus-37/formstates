@@ -155,8 +155,8 @@ jobs:
         if: success() || failure()
         with:
           name: Component accessibility tests # Name of the check run which will be created
-          path: testrunreports/a11ytests-xunit.xml # Path to test results
-          reporter: jest-junit # Format of test results
+          path: testrunreports/a11ytests.json # Path to test results
+          reporter: mocha-json # Format of test results
 
   publish_test_results:
     needs: storybook_tests

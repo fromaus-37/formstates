@@ -13,7 +13,7 @@
     "storybook-docs": "storybook dev --docs",
     "test-storybook": "test-storybook",
     "test-storybook:ci": "concurrently -k -s first -n \"SB,TEST\" -c \"magenta,blue\" \"http-server storybook-static --port 6006\" \"wait-on http://127.0.0.1:6006 && test-storybook --url http://127.0.0.1:6006 --coverage --junit\"",
-    "test-storybook-a11y:ci": "axe-storybook --reporter xunit --reporter-options output=testrunreports/a11ytests-xunit.xml",
+    "test-storybook-a11y:ci": "axe-storybook --reporter json --reporter-options output=testrunreports/a11ytests.json",
     "chromatic": "# do nothing as we don't want Chromatic project token in here",
     "prepare": "husky install",
     "release": "semantic-release"
