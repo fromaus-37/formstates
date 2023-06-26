@@ -77,7 +77,8 @@ jobs:
       # PROS:
       # 1.Give a nice summary markdown which would be great for
       #   displaying in a sticky PR comment alongside coverage
-      #   comment from Coveralls or CodeCov
+      #   comment from Coveralls or CodeCov.
+      # 2. Options to sent th summary to job summary, file or stdout
       #
       # CONS:
       # 1. Does not generate detailed report so we need to use another
@@ -92,21 +93,33 @@ jobs:
       #     paths: 'testrunreports/*-junit.xml'
       #   if: always()
 
+      # PROS:
+      # 1. Posts and updates a sticky comment with link to
+      #  result summary that has been posted as a check run summary
+      #  (still udner a different job, in my case Chromatic, like
+      #  all other actions; this is due to GitHub Actions limitation)
+      # CONS:
+      # 1. No detailed run report. use a differnt action for that
+      # 2. No option to disable the status check that links
+      #  to a job summary/check run summary that is quite useless as
+      #  it is the same test run summary that is displayed in the
+      #  sticky comment, and not a detailed test run report.
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
         with:
+          check_name: Test Result Summary
           files: |
             testrunreports/*-junit.xml
 
-      # - name: Test Report
-      #   uses: dorny/test-reporter@v1
-      #   # run this step even if previous step failed:
-      #   if: success() || failure()
-      #   with:
-      #     name: Storybook test run report # Name of the check run which will be created
-      #     path: testrunreports/*-junit.xml # Path to test results
-      #     reporter: jest-junit # Format of test results
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        # run this step even if previous step failed:
+        if: success() || failure()
+        with:
+          name: Storybook test run report # Name of the check run which will be created
+          path: testrunreports/*-junit.xml # Path to test results
+          reporter: jest-junit # Format of test results
 
       - name: Upload raw coverage as artifact
         uses: actions/upload-artifact@v3.1.2
