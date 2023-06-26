@@ -13,6 +13,7 @@ logs
 
 # testing
 /coverage
+testrunreports
 
 # next.js
 /.next/

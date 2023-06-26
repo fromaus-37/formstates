@@ -54,6 +54,15 @@ jobs:
         run: |
           npm run test-storybook:ci
 
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        # run this step even if previous step failed:
+        if: success() || failure()
+        with:
+          name: Storybook smoke and interaction Tests # Name of the check run which will be created
+          path: testrunreports/jest-*.xml # Path to test results
+          reporter: jest-junit # Format of test results
+
       - name: Upload raw coverage as artifact
         uses: actions/upload-artifact@v3.1.2
         with:
