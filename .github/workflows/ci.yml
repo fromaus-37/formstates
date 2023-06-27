@@ -156,7 +156,7 @@ jobs:
           # test run report output by aze-storybook-testing
           # a11y tester for storybook that we're using.
         run: |
-          t = $(grep -oP  -m 1 "(?<=time=\")(.*)(?=\")" testrunreports/a11ytests-xunit.xml)
+          t = $(grep -oP  -m 1 "(?<=time=\")(.*)(?=\")" testrunreports/a11ytests.xml)
           echo "<testsuites time=\"${t}\">" >> testrunreports/a11ytests-fixed.xml
           cat testrunreports/a11ytests.xml >> testrunreports/a11ytests-fixed.xml
           echo '</testsuites>' >> testrunreports/a11ytests-fixed.xml
