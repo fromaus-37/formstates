@@ -151,7 +151,7 @@ jobs:
 
       - name: Massage a11y test run report
         run: |
-          echo '<testsuites>' >> testrunreports/a11ytests-fixed.xml
+          echo '<testsuites time="0.0">' >> testrunreports/a11ytests-fixed.xml
           cat testrunreports/a11ytests.xml >> testrunreports/a11ytests-fixed.xml
           echo '</testsuites>' >> testrunreports/a11ytests-fixed.xml
       - name: Test Report
