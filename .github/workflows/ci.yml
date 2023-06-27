@@ -149,13 +149,18 @@ jobs:
         run: |
           npm run test-storybook-a11y:ci
 
+      - name: Massage a11y test run report
+        run: |
+          echo '<testsuites>' >> testrunreports/a11ytests-fixed.xml
+          cat testrunreports/a11ytests.xml >> testrunreports/a11ytests-fixed.xml
+          echo '</testsuites>' >> testrunreports/a11ytests-fixed.xml
       - name: Test Report
         uses: dorny/test-reporter@v1
         # run this step even if previous step failed:
         if: success() || failure()
         with:
           name: Component accessibility tests # Name of the check run which will be created
-          path: testrunreports/a11ytests.json # Path to test results
+          path: testrunreports/a11ytests-fixed.xml # Path to test results
           reporter: mocha-json # Format of test results
 
   publish_test_results:
