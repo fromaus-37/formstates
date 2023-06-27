@@ -149,9 +149,15 @@ jobs:
         run: |
           npm run test-storybook-a11y:ci
 
-      - name: Massage a11y test run report
+      - name:
+          Massage a11y test run report
+          # Need to add a testssuites element that wraps the
+          # only (and outermost) testsuite element in the
+          # test run report output by aze-storybook-testing
+          # a11y tester for storybook that we're using.
         run: |
-          echo '<testsuites time="0.0">' >> testrunreports/a11ytests-fixed.xml
+          t = $(grep -oP  -m 1 "(?<=time=\")(.*)(?=\")" testrunreports/a11ytests-xunit.xml)
+          echo "<testsuites time=\"${t}\">" >> testrunreports/a11ytests-fixed.xml
           cat testrunreports/a11ytests.xml >> testrunreports/a11ytests-fixed.xml
           echo '</testsuites>' >> testrunreports/a11ytests-fixed.xml
       - name: Test Report
