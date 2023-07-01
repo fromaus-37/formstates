@@ -3,7 +3,12 @@ module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
-  extends: ['eslint:recommended', 'next/core-web-vitals', 'prettier'],
+  extends: [
+    'plugin:cypress/recommended',
+    'eslint:recommended',
+    'next/core-web-vitals',
+    'prettier',
+  ],
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
