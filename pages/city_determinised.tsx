@@ -268,7 +268,7 @@ const CityDeterminised = () => {
         </p>
       </section>
       <section ref={panelResult} className={clsx(styles.invisible)}>
-        <h1 data-testid={testIds.rightAnswer}>That&apos!s right!</h1>
+        <h1 data-testid={testIds.rightAnswer}>That&apos;s right!</h1>
       </section>
     </>
   );

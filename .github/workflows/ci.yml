@@ -1,5 +1,9 @@
 name: CI
 concurrency: ci-${{ github.ref }}
+permissions:
+  checks: write
+  pull-requests: write
+
 on:
   pull_request:
     types: [opened, synchronize, reopened, closed]
@@ -51,8 +55,88 @@ jobs:
           npm run build-storybook
 
       - name: Run test-runner for component smoke and interaction tests with coverage
+        env:
+          JEST_JUNIT_OUTPUT_FILE: testrunreports/storybooktests-junit.xml
+
         run: |
           npm run test-storybook:ci
+
+      # PROS: Display status and link to repor on PR
+      # CONS: detailed_summary : true did nothing and
+      # the displayed report is rubbins (only number of
+      # tests that passed and failed as opposed to the beautiful
+      # report of dorny/test-reporter@v1)
+      # --------------------------------------------------------
+      # - name: Publish Test Report
+      #   uses: mikepenz/action-junit-report@v3
+      #   if: success() || failure() # always run even if the previous step fails
+      #   with:
+      #     report_paths: 'testrunreports/*-junit.xml'
+      #     detailed_summary: true
+
+      # PROS:
+      # 1.Give a nice summary markdown which would be great for
+      #   displaying in a sticky PR comment alongside coverage
+      #   comment from Coveralls or CodeCov.
+      # 2. Options to sent th summary to job summary, file or stdout
+      #
+      # CONS:
+      # 1. Does not generate detailed report so we need to use another
+      #  action
+      # 2. The summary is displayed on the job but is even more obscure
+      #  than the check run summary diaplayed in Checks tab on PR by
+      # other actions like dorny/test-reporter@v1
+      #
+      # - name: Test Summary
+      #   uses: test-summary/action@v2
+      #   with:
+      #     paths: 'testrunreports/*-junit.xml'
+      #   if: always()
+
+      # PROS:
+      # 1. Posts and updates a sticky comment with link to
+      #  result summary that has been posted as a check run summary
+      #  (still udner a different job, in my case Chromatic, like
+      #  all other actions; this is due to GitHub Actions limitation)
+      # CONS:
+      # 1. No detailed run report. use a differnt action for that
+      # 2. No option to disable the status check that links
+      #  to a job summary/check run summary that is quite useless as
+      #  it is the same test run summary that is displayed in the
+      #  sticky comment, and not a detailed test run report.
+      # - name: Publish Test Results
+      #   uses: EnricoMi/publish-unit-test-result-action@v2
+      #   if: always()
+      #   with:
+      #     check_name: Test Result Summary
+      #     files: |
+      #       testrunreports/*-junit.xml
+
+      # PROS:
+      #  1. Genreates an excellent markdown report of test run
+      #    with a status check on PR that contains the link to the
+      #    report
+      #  2. Can provide multiple files (path attr is accepts
+      #    asterisks as shown in the use below). This is great
+      #    because runs of different types of tests create
+      #    their own status checks (being separate jobs)
+      #    then we have a combined status check whose sole purpose
+      #    is to
+      # CONS:
+      #  1. No option to generate a summary in sticky comment
+      #    (no big deal as if the tests passed, we rarely want to
+      #    see which individual ones passed, and if the fail, we
+      #    always want to see th details report to which there is
+      #    a link on the status check created by this action)
+
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        # run this step even if previous step failed:
+        if: success() || failure()
+        with:
+          name: Component render and interaction tests # Name of the check run which will be created
+          path: testrunreports/*-junit.xml # Path to test results
+          reporter: jest-junit # Format of test results
 
       - name: Upload raw coverage as artifact
         uses: actions/upload-artifact@v3.1.2
@@ -64,6 +148,26 @@ jobs:
         # these do not generate coverage
         run: |
           npm run test-storybook-a11y:ci
+
+      - name:
+          Massage a11y test run report
+          # Need to add a testssuites element that wraps the
+          # only (and outermost) testsuite element in the
+          # test run report output by aze-storybook-testing
+          # a11y tester for storybook that we're using.
+        run: |
+          t=$(grep -oP  -m 1 "(?<=time=\")(.*)(?=\")" testrunreports/a11ytests.xml)
+          echo "<testsuites time=\"${t}\">" >> testrunreports/a11ytests-fixed.xml
+          cat testrunreports/a11ytests.xml >> testrunreports/a11ytests-fixed.xml
+          echo '</testsuites>' >> testrunreports/a11ytests-fixed.xml
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        # run this step even if previous step failed:
+        if: success() || failure()
+        with:
+          name: Component accessibility tests # Name of the check run which will be created
+          path: testrunreports/a11ytests-fixed.xml # Path to test results
+          reporter: jest-junit # Format of test results
 
   publish_test_results:
     needs: storybook_tests

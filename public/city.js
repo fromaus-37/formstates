@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const txtCity = document.querySelector('#txtCity');
 const btnSubmit = document.querySelector('#btnSubmit');
 const txtWrongAnswer = document.querySelector('#txtWrongAnswer');
