@@ -23,6 +23,7 @@ module.exports = {
         //declaring 'next/core-web-vitals' and 'prettier' again in case
         //the two plugin:... configs above overrode any of their rules
         //Also, 'prettier' needs to be last in any extends array
+        'plugin:cypress/recommended',
         'next/core-web-vitals',
         'plugin:storybook/recommended',
         'prettier',
